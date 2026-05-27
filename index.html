@@ -1,171 +1,267 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>さんぽコースメーカー サポート</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  <!DOCTYPE html>
+  <html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: タイトルと説明文 -->
+    <title>さんぽコースメーカー - 距離指定で散歩コースを自動生成するiOSアプリ</title>
+    <meta name="description" content="スタート地点と目標距離を設定するだけで散歩コースを自動生成するiOSアプリ。作成したコ
+  ースはGoogleマップと連携してすぐに出発できます。位置情報はデバイス内で完結。App Storeで配信中（¥150）。">
+    <meta name="keywords"
+  content="散歩,ウォーキング,コース自動生成,散歩コース,iOS,iPhoneアプリ,さんぽ,ルート生成,歩数,距離指定">
+
+    <!-- OGP: SNSでシェアされたときの表示 -->
+    <meta property="og:title" content="さんぽコースメーカー - 距離指定で散歩コースを自動生成するiOSアプリ">
+    <meta property="og:description"
+  content="スタート地点と目標距離を設定するだけで散歩コースを自動生成。Googleマップ連携で即出発。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://notseri.github.io/sanpo-support/">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- 正規URL -->
+    <link rel="canonical" href="https://notseri.github.io/sanpo-support/">
+
+    <!-- 構造化データ: Googleがアプリと認識しやすくなる -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "さんぽコースメーカー",
+      "operatingSystem": "iOS",
+      "applicationCategory": "HealthApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "150",
+        "priceCurrency": "JPY"
+      },
+      "description": "スタート地点と目標距離を設定するだけで散歩コースを自動生成するiOSアプリ。作成したコースはGoogleマッ
+  プと連携してすぐに出発できます。",
+      "url": "https://apps.apple.com/jp/app/さんぽコースメーカー/id6772983197"
     }
+    </script>
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
-      background: #f5f5f7;
-      color: #1d1d1f;
-      line-height: 1.7;
-    }
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    header {
-      background: #2d9a4e;
-      color: white;
-      padding: 48px 24px;
-      text-align: center;
-    }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+        background: #f5f5f7;
+        color: #1d1d1f;
+        line-height: 1.7;
+      }
 
-    header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+      header {
+        background: #2d9a4e;
+        color: white;
+        padding: 48px 24px;
+        text-align: center;
+      }
 
-    header p {
-      font-size: 16px;
-      opacity: 0.85;
-    }
+      header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
 
-    main {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
+      header p {
+        font-size: 16px;
+        opacity: 0.85;
+        margin-bottom: 4px;
+      }
 
-    section {
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
+      .appstore-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: white;
+        color: #2d9a4e;
+        padding: 12px 28px;
+        border-radius: 100px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
+      }
 
-    section h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #2d9a4e;
-      margin-bottom: 16px;
-    }
+      .appstore-btn:hover {
+        background: #f0f0f0;
+      }
 
-    section p {
-      font-size: 15px;
-      color: #444;
-      margin-bottom: 10px;
-    }
+      main {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
 
-    section p:last-child {
-      margin-bottom: 0;
-    }
+      section {
+        background: white;
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
 
-    .faq-item {
-      margin-bottom: 20px;
-    }
+      section h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2d9a4e;
+        margin-bottom: 16px;
+      }
 
-    .faq-item:last-child {
-      margin-bottom: 0;
-    }
+      section p {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 10px;
+      }
 
-    .faq-item dt {
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 6px;
-      color: #1d1d1f;
-    }
+      section p:last-child {
+        margin-bottom: 0;
+      }
 
-    .faq-item dd {
-      font-size: 15px;
-      color: #444;
-    }
+      .features {
+        list-style: none;
+        padding: 0;
+      }
 
-    .contact-link {
-      display: inline-block;
-      margin-top: 12px;
-      background: #2d9a4e;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-    }
+      .features li {
+        font-size: 15px;
+        color: #444;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
 
-    .contact-link:hover {
-      background: #248040;
-    }
+      .features li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
 
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      font-size: 13px;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
+      .features li .icon {
+        font-size: 18px;
+        flex-shrink: 0;
+      }
 
-<header>
-  <h1>🥾 さんぽコースメーカー</h1>
-  <p>サポートページ</p>
-</header>
+      .faq-item {
+        margin-bottom: 20px;
+      }
 
-<main>
+      .faq-item:last-child {
+        margin-bottom: 0;
+      }
 
-  <section>
-    <h2>アプリについて</h2>
-    <p>
-      さんぽコースメーカーは、スタート地点と目標距離を設定するだけで
-      ウォーキングコースを自動生成するiOSアプリです。
-    </p>
-    <p>
-      作成したコースはGoogleマップと連携して、
-      そのまま散歩を開始することができます。
-    </p>
-  </section>
+      .faq-item dt {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 6px;
+        color: #1d1d1f;
+      }
 
-  <section>
-    <h2>よくある質問</h2>
-    <dl>
-      <div class="faq-item">
-        <dt>位置情報はどのように使われますか？</dt>
-        <dd>位置情報はコース生成のためにのみ使用され、すべてデバイス内で処理されます。外部サーバーへの送信は一切行いません。</dd>
-      </div>
-      <div class="faq-item">
-        <dt>自動生成でルートが見つからない場合は？</dt>
-        <dd>スタート地点を変えるか、目標距離を変更してお試しください。道路が少ない地域では生成が難しい場合があります。</dd>
-      </div>
-      <div class="faq-item">
-        <dt>Googleマップが開かない場合は？</dt>
-        <dd>お使いのデバイスにGoogleマップアプリがインストールされているかご確認ください。インストールされていない場合、ブラウザ版のGoogleマップで開きます。</dd>
-      </div>
-      <div class="faq-item">
-        <dt>保存したコースを削除するには？</dt>
-        <dd>履歴画面（時計アイコン）を開き、「Edit」ボタンをタップすると削除できます。</dd>
-      </div>
-    </dl>
-  </section>
+      .faq-item dd {
+        font-size: 15px;
+        color: #444;
+      }
 
-  <section>
-    <h2>お問い合わせ</h2>
-    <p>ご不明な点やご要望がございましたら、メールにてお気軽にお問い合わせください。</p>
-    <a class="contact-link" href="mailto:notseriworks@gmail.com">メールで問い合わせる</a>
-  </section>
+      .contact-link {
+        display: inline-block;
+        margin-top: 12px;
+        background: #2d9a4e;
+        color: white;
+        padding: 12px 28px;
+        border-radius: 100px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+      }
 
-</main>
+      .contact-link:hover {
+        background: #248040;
+      }
 
-<footer>
-  <p><a href="privacy.html" style="color: #2d9a4e;">プライバシーポリシー</a></p>
-  <p style="margin-top: 8px;">© 2026 notseriworks</p>
-</footer>
+      footer {
+        text-align: center;
+        padding: 32px 24px;
+        font-size: 13px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
 
-</body>
-</html>
+  <header>
+    <h1>🥾 さんぽコースメーカー</h1>
+    <p>距離を決めるだけで、散歩コースを自動生成</p>
+    <a class="appstore-btn" href="https://apps.apple.com/jp/app/さんぽコースメーカー/id6772983197">
+      📱 App Store でダウンロード
+    </a>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>アプリについて</h2>
+      <p>
+        さんぽコースメーカーは、スタート地点と目標距離を設定するだけで
+        ウォーキングコースを自動生成するiOSアプリです。
+      </p>
+      <p>
+        作成したコースはGoogleマップと連携して、
+        そのまま散歩を開始することができます。
+      </p>
+    </section>
+
+    <section>
+      <h2>主な機能</h2>
+      <ul class="features">
+        <li><span class="icon">📍</span><span>スタート地点を地図から簡単に選択</span></li>
+        <li><span class="icon">📏</span><span>目標距離を指定してコースを自動生成</span></li>
+        <li><span class="icon">🗺️</span><span>Googleマップと連携してナビゲーション</span></li>
+        <li><span class="icon">🕐</span><span>作成したコースを履歴として保存</span></li>
+        <li><span class="icon">🔒</span><span>位置情報はデバイス内で完結・外部送信なし</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>よくある質問</h2>
+      <dl>
+        <div class="faq-item">
+          <dt>位置情報はどのように使われますか？</dt>
+          <dd>位置情報はコース生成のためにのみ使用され、すべてデバイス内で処理されます。外部サーバーへの送信は一切行いま
+  せん。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>自動生成でルートが見つからない場合は？</dt>
+
+  <dd>スタート地点を変えるか、目標距離を変更してお試しください。道路が少ない地域では生成が難しい場合があります。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>Googleマップが開かない場合は？</dt>
+          <dd>お使いのデバイスにGoogleマップアプリがインストールされているかご確認ください。インストールされていない場合
+  、ブラウザ版のGoogleマップで開きます。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>保存したコースを削除するには？</dt>
+          <dd>履歴画面（時計アイコン）を開き、「Edit」ボタンをタップすると削除できます。</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>お問い合わせ</h2>
+      <p>ご不明な点やご要望がございましたら、メールにてお気軽にお問い合わせください。</p>
+      <a class="contact-link" href="mailto:notseriworks@gmail.com">メールで問い合わせる</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><a href="privacy.html" style="color: #2d9a4e;">プライバシーポリシー</a></p>
+    <p style="margin-top: 8px;">© 2026 notseriworks</p>
+  </footer>
+
+  </body>
+  </html>
