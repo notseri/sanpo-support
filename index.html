@@ -182,6 +182,32 @@
         background: #248040;
       }
 
+      .screenshots {
+        overflow-x: auto;
+        display: flex;
+        gap: 16px;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .screenshots figure {
+        flex-shrink: 0;
+        text-align: center;
+      }
+
+      .screenshots img {
+        width: 160px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: block;
+      }
+
+      .screenshots figcaption {
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
+      }
+
       footer {
         text-align: center;
         padding: 32px 24px;
@@ -223,6 +249,32 @@
         <li><span class="icon">🕐</span><span>作成したコースを履歴として保存</span></li>
         <li><span class="icon">🔒</span><span>位置情報はデバイス内で完結・外部送信なし</span></li>
       </ul>
+    </section>
+
+    <section>
+      <h2>スクリーンショット</h2>
+      <div class="screenshots">
+        <figure>
+          <img src="screenshot_01_auto_mode.png" alt="自動モードでコースを生成">
+          <figcaption>自動モード</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshot_02_manual_mode.png" alt="手動モードでコースを編集">
+          <figcaption>手動モード</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshot_03_route_map.png" alt="生成されたルートをマップで確認">
+          <figcaption>ルートマップ</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshot_04_location_picker.png" alt="スタート地点を地図から選択">
+          <figcaption>位置選択</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshot_05_history.png" alt="作成したコースの履歴">
+          <figcaption>履歴</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section>
